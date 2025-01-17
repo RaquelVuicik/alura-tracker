@@ -1,8 +1,37 @@
 {
-    "projetos": [
-        {
-            "id": 1,
-            "nome": "Alura Tracker 3.0"
-        }
-    ]
+  "projetos": [
+    {
+      "id": "1",
+      "nome": "Alura Tracker 3.0"
+    },
+    {
+      "id": "f89c",
+      "nome": "ByteBank"
+    }
+  ],
+  "tarefas": [
+    {
+      "id": "1",
+      "duracaoEmSegundos": 120,
+      "descricao": "Configuração do ambiente",
+      "projeto": {
+        "id": 1,
+        "nome": "Alura Tracker 3.0"
+      }
+    },
+    {
+      "id": "5256",
+      "duracaoEmSegundos": 4,
+      "descricao": "hsaushuhsuhauh"
+    },
+    {
+      "id": "403c",
+      "duracaoEmSegundos": 2,
+      "descricao": "asasasasas",
+      "projeto": {
+        "id": "1",
+        "nome": "Alura Tracker 3.0"
+      }
+    }
+  ]
 }
