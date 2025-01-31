@@ -1,15 +1,24 @@
 <template>
     <Formulario @aoSalvarTarefa="salvarTarefa" />
     <div class="lista">
+      <Box v-if="listaEstaVazia">
+          Você não está muito produtivo hoje :(
+          <span class="has-text-weight-bold">:(</span>
+      </Box>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input" type="text" placeholder="Digite para filtrar" v-model="filtro"/>
+          <span class="icon is-small is-left">
+            <i class="fas fa-search"></i>
+          </span>
+        </p>
+      </div>
         <Tarefa
           v-for="(tarefa, index) in tarefas"
           :key="index"
           :tarefa="tarefa"
           @aoTarefaClicada="selecionarTarefa"
         />
-        <Box v-if="listaEstaVazia">
-            Você não está muito produtivo hoje :(
-        </Box>
         <div class="modal" :class="{ 'is-active': tarefaSelecionada }" v-if="tarefaSelecionada">
           <div class="modal-background"></div>
           <div class="modal-card">
@@ -42,7 +51,7 @@
   </template>
   
   <script lang="ts">
-  import { computed, defineComponent } from 'vue';
+  import { computed, defineComponent, ref, watchEffect } from 'vue';
   import Formulario from '../components/Formulario.vue';
   import Tarefa from '../components/Tarefa.vue';
   import Box from '../components/Box.vue';
@@ -86,10 +95,24 @@
         const store = useStore()
         store.dispatch(OBTER_TAREFAS)
         store.dispatch(OBTER_PROJETOS)
+
+        const filtro = ref("");
+
+        // const tarefas = computed(() => 
+        //   store.state.tarefa.tarefas.filter(
+        //     (t) => !filtro.value || t.descricao.includes(filtro.value)
+        //   )
+        // );
+
+        watchEffect(() => {
+          store.dispatch(OBTER_TAREFAS, filtro.value)
+        })
+
         return {
-            tarefas: computed(() => store.state.tarefas),
-            store
-        }
+            tarefas: computed(() => store.state.tarefa.tarefas),
+            store,
+            filtro,
+        };
     }
   });
   </script>
