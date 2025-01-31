@@ -19,34 +19,32 @@
           :tarefa="tarefa"
           @aoTarefaClicada="selecionarTarefa"
         />
-        <div class="modal" :class="{ 'is-active': tarefaSelecionada }" v-if="tarefaSelecionada">
-          <div class="modal-background"></div>
-          <div class="modal-card">
-            <header class="modal-card-head">
+        <Modal :mostrar="tarefaSelecionada != null">
+          <header class="modal-card-head">
               <p class="modal-card-title">Editando uma tarefa</p>
               <button @click="fecharModal" class="delete" aria-label="close"></button>
-            </header>
-            <section class="modal-card-body">
-              <div class="field">
-                <label for="descricaoDaTarefa" class="label">
-                    Descrição
-                </label>
-                <input
-                    type="text"
-                    class="input"
-                    v-model="tarefaSelecionada.descricao"
-                    id="descricaoDaTarefa"
-                />
-              </div>
-            </section>
-            <footer class="modal-card-foot">
-              <div class="buttons">
-                <button @click="alterarTarefa" class="button is-success">Salvar alterações</button>
-                <button @click="fecharModal" class="button">Cancelar</button>
-              </div>
-            </footer>
-          </div>
-        </div>
+          </header>
+          <section class="modal-card-body">
+            <div class="field">
+            <label for="descricaoDaTarefa" class="label">
+                Descrição
+            </label>
+            <input
+                type="text"
+                class="input"
+                v-if="tarefaSelecionada"
+                v-model="tarefaSelecionada.descricao"
+                id="descricaoDaTarefa"
+            />
+            </div>
+          </section>
+          <footer class="modal-card-foot">
+            <div class="buttons">
+            <button @click="alterarTarefa" class="button is-success">Salvar alterações</button>
+            <button @click="fecharModal" class="button">Cancelar</button>
+            </div>
+          </footer>
+        </Modal>
     </div>
   </template>
   
@@ -58,6 +56,7 @@
   import { useStore } from '@/store';
   import { ALTERAR_TAREFA, CADASTRAR_TAREFA, OBTER_PROJETOS, OBTER_TAREFAS } from '@/store/tipo-acoes';
   import ITarefa from '@/interfaces/ITarefa';
+  import Modal from '@/components/Modal.vue';
   
   export default defineComponent({
     name: 'App',
@@ -65,6 +64,7 @@
       Formulario,
       Tarefa,
       Box,
+      Modal,
     },
     data () {
       return {

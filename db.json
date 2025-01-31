@@ -21,7 +21,7 @@
     {
       "id": "1",
       "duracaoEmSegundos": 120,
-      "descricao": "Configuração do ambiente",
+      "descricao": "Configuração do ambiente 4",
       "projeto": {
         "id": 1,
         "nome": "Alura Tracker 3.0"
@@ -62,7 +62,7 @@
     {
       "id": "f3e8",
       "duracaoEmSegundos": 5,
-      "descricao": "teste",
+      "descricao": "teste 2",
       "projeto": {
         "id": "a3cb",
         "nome": "Estudando padrões de projeto"
